@@ -115,7 +115,7 @@ class SiteController extends Controller
 
 控制器ID遵循以下规则衍生控制器类名：
 
-* 将用正斜杠区分的每个单词第一个字母转为大写。注意如果控制器ID包含正斜杠，只将最后的正斜杠后的部分第一个字母转为大写；
+* 将用中横杠区分的每个单词第一个字母转为大写。注意如果控制器ID包含正斜杠，只将最后的正斜杠后的部分第一个字母转为大写；
 * 去掉中横杠，将正斜杠替换为反斜杠;
 * 增加`Controller`后缀;
 * 在前面增加[[yii\base\Application::controllerNamespace|controller namespace]]控制器命名空间.
