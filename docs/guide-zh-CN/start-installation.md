@@ -31,15 +31,13 @@ Composer 安装后，切换到一个可通过 Web 访问的目录，执行如下
 > 注意：在安装过程中 Composer 可能会询问你 GitHub 账户的登录信息，因为可能在使用中超过了 GitHub API 
 （对匿名用户的）使用限制。因为 Composer 需要为所有扩展包从 GitHub 
 中获取大量信息，所以超限非常正常。（译注：也意味着作为程序猿没有 GitHub 账号，就真不能愉快地玩耍了）登陆 GitHub 
-之后可以得到更高的 API 限额，这样 Composer 才能正常运行。更多细节请参考 [Composer 
-文档](https://getcomposer.org/doc/articles/troubleshooting.md#api-rate-limit-and-oauth-tokens)（该段 Composer 
-中文文档[期待您的参与](https://github.com/5-say/composer-doc-cn/blob/master/cn-introduction/articles/troubleshooting.md#api-rate-limit-and-oauth-tokens)）。
+之后可以得到更高的 API 限额，这样 Composer 才能正常运行。更多细节请参考 [Composer 文档](https://getcomposer.org/doc/articles/troubleshooting.md#api-rate-limit-and-oauth-tokens)（该段 Composer 中文文档 [期待您的参与](https://github.com/5-say/composer-doc-cn/blob/master/cn-introduction/articles/troubleshooting.md#api-rate-limit-and-oauth-tokens)）。
 
 > 技巧：如果你想安装 Yii 的最新开发版本，可以使用以下命令代替，它添加了一个 [stability 选项](https://getcomposer.org/doc/04-schema.md#minimum-stability)（[中文版](https://github.com/5-say/composer-doc-cn/blob/master/cn-introduction/04-schema.md#minimum-stability)）:
 >
 >     composer create-project --prefer-dist --stability=dev yiisoft/yii2-app-basic basic
 >
-> 注意，Yii 的开发版(dev 版)不应该用于生产环境中，它可能会破坏运行中的代码。
+> 注意，Yii 的开发版( dev 版)不应该用于生产环境中，它可能会破坏运行中的代码。
 
 
 通过归档文件安装 <span id="installing-from-archive-file"></span>
@@ -64,8 +62,8 @@ Composer 安装后，切换到一个可通过 Web 访问的目录，执行如下
 
 但是其他的安装方式也存在：
 
-* 如果你只想安装核心框架，然后从零开始构建整个属于你自己的应用程序模版，可以参考[从头构建自定义模版](tutorial-start-from-scratch.md)一节的介绍。
-* 如果你要开发一个更复杂的应用，可以更好地适用于团队开发环境的，可以考虑安装[高级应用模版](tutorial-advanced-app.md)。
+* 如果你只想安装核心框架，然后从零开始构建整个属于你自己的应用程序模版，可以参考 [从头构建自定义模版](tutorial-start-from-scratch.md) 一节的介绍。
+* 如果你要开发一个更复杂的应用，可以更好地适用于团队开发环境的，可以考虑安装 [高级应用模版](tutorial-advanced-app.md) 。
 
 
 验证安装的结果 <span id="verifying-installation"></span>
@@ -97,15 +95,15 @@ http://localhost/basic/web/index.php
 配置 Web 服务器 <span id="configuring-web-servers"></span>
 -----------------------
 
->补充：如果你现在只是要试用 Yii 而不是将其部署到生产环境中，本小节可以跳过。
+> 补充：如果你现在只是要试用 Yii 而不是将其部署到生产环境中，本小节可以跳过。
 
-通过上述方法安装的应用程序在 Windows，Max OS X，Linux 中的 [Apache HTTP 服务器](http://httpd.apache.org/)或 [Nginx HTTP 服务器](http://nginx.org/)且PHP版本为5.4或更高都可以直接运行。Yii 2.0 也兼容 Facebook 公司的 [HHVM](http://hhvm.com/)，由于 HHVM 和标准 PHP 在边界案例上有些地方略有不同，在使用 HHVM 时需稍作处理。
+通过上述方法安装的应用程序在 Windows，Max OS X，Linux 中的 [Apache HTTP 服务器](http://httpd.apache.org/) 或 [Nginx HTTP 服务器](http://nginx.org/) 且PHP版本为5.4或更高都可以直接运行。Yii 2.0 也兼容 Facebook 公司的 [HHVM](http://hhvm.com/)，由于 HHVM 和标准 PHP 在边界案例上有些地方略有不同，在使用 HHVM 时需稍作处理。
 
-在生产环境的服务器上，你可能会想配置服务器让应用程序可以通过 URL `http://www.example.com/index.php` 访问而不是 `http://www.example.com/basic/web/index.php`。这种配置需要将 Web 服务器的文档根目录指向 `basic/web` 目录。可能你还会想隐藏掉 URL 中的 `index.php`，具体细节在 [URL 解析和生成](runtime-url-handling.md)一章中有介绍，你将学到如何配置 Apache 或 Nginx 服务器实现这些目标。
+在生产环境的服务器上，你可能会想配置服务器让应用程序可以通过 URL `http://www.example.com/index.php` 访问而不是 `http://www.example.com/basic/web/index.php`。这种配置需要将 Web 服务器的文档根目录指向 `basic/web` 目录。可能你还会想隐藏掉 URL 中的 `index.php`，具体细节在 [URL 解析和生成](runtime-routing.md) 一章中有介绍，你将学到如何配置 Apache 或 Nginx 服务器实现这些目标。
 
->补充：将 `basic/web` 设置为文档根目录，可以防止终端用户访问 `basic/web` 相邻目录中的私有应用代码和敏感数据文件。禁止对其他目录的访问是一个不错的安全改进。
+> 补充：将 `basic/web` 设置为文档根目录，可以防止终端用户访问 `basic/web` 相邻目录中的私有应用代码和敏感数据文件。禁止对其他目录的访问是一个不错的安全改进。
 
->补充：如果你的应用程序将来要运行在共享虚拟主机环境中，没有修改其 Web 服务器配置的权限，你依然可以通过调整应用的结构来提升安全性。详情请参考[共享主机环境](tutorial-shared-hosting.md) 一章。
+> 补充：如果你的应用程序将来要运行在共享虚拟主机环境中，没有修改其 Web 服务器配置的权限，你依然可以通过调整应用的结构来提升安全性。详情请参考 [共享主机环境](tutorial-shared-hosting.md) 一章。
 
 
 ### 推荐使用的 Apache 配置 <span id="recommended-apache-configuration"></span>
@@ -176,3 +174,5 @@ server {
 使用该配置时，你还应该在 `php.ini` 文件中设置 `cgi.fix_pathinfo=0` ，能避免掉很多不必要的 `stat()` 系统调用。
 
 还要注意当运行一个 HTTPS 服务器时，需要添加 `fastcgi_param HTTPS on;` 一行，这样 Yii 才能正确地判断连接是否安全。
+
+

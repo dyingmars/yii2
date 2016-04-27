@@ -2,12 +2,12 @@
 ============
 
 应用主体是管理 Yii 应用系统整体结构和生命周期的对象。
-每个Yii应用系统只能包含一个应用主体，应用主体在 [入口脚本](structure-entry-scripts.md) 中创建并能通过表达式 `\Yii::$app` 全局范围内访问。
+每个 Yii 应用系统只能包含一个应用主体，应用主体在 [入口脚本](structure-entry-scripts.md) 中创建并能通过表达式 `\Yii::$app` 全局范围内访问。
 
-> 补充: 当我们说"一个应用"，它可能是一个应用主体对象，也可能是一个应用系统，是根据上下文来决定[译：中文为避免歧义，Application翻译为应用主体]。
+> 补充: 当我们说 **一个应用** ，它可能是一个 **应用主体对象**，也可能是一个 **应用系统** ，是根据上下文来决定 *译：中文为避免歧义， Application 翻译为应用主体*。
 
-Yii有两种应用主体: [[yii\web\Application|网页应用主体]] and
-[[yii\console\Application|控制台应用主体]]， 如名称所示，前者主要处理网页请求，后者处理控制台请求。
+ Yii 有两种应用主体: [[yii\web\Application|**网页应用主体**]] 和
+[[yii\console\Application|**控制台应用主体**]]， 如名称所示，前者主要处理网页请求，后者处理控制台请求。
 
 
 ## 应用主体配置 <span id="application-configurations"></span>
@@ -26,7 +26,7 @@ $config = require(__DIR__ . '/../config/web.php');
 ```
 
 类似其他 [配置](concept-configurations.md) 文件, 应用主体配置文件标明如何设置应用对象初始属性。
-由于应用主体配置比较复杂，一般保存在多个类似如上web.php的 [配置文件](concept-configurations.md#configuration-files) 当中。
+由于应用主体配置比较复杂，一般保存在多个类似如上 `web.php` 的 [配置文件](concept-configurations.md#configuration-files) 当中。
 
 ## 应用主体属性 <span id="application-properties"></span>
 
@@ -36,26 +36,26 @@ $config = require(__DIR__ . '/../config/web.php');
 
 ### 必要属性 <span id="required-properties"></span>
 
-在一个应用中，至少要配置2个属性: [[yii\base\Application::id|id]] 和 [[yii\base\Application::basePath|basePath]]。
+在一个应用中，至少要配置2个属性: [[yii\base\Application::id|id]] 和 [[yii\base\Application::basePath|basePath]] 。
 
 
 #### [[yii\base\Application::id|id]] <span id="id"></span>
 
-[[yii\base\Application::id|id]] 属性用来区分其他应用的唯一标识ID。主要给程序使用。
-为了方便协作，最好使用数字作为应用主体ID，但不强制要求为数字。
+[[yii\base\Application::id|id]] 属性用来区分其他应用的唯一标识 ID 。主要给程序使用。
+为了方便协作，最好使用数字作为应用主体 ID ，但不强制要求为数字。
 
 
 #### [[yii\base\Application::basePath|basePath]] <span id="basePath"></span>
 
 
 [[yii\base\Application::basePath|basePath]] 指定该应用的根目录。根目录包含应用系统所有受保护的源代码。
-在根目录下可以看到对应MVC设计模式的`models`, `views`, `controllers`等子目录。
+在根目录下可以看到对应 MVC 设计模式的 `models` ， `views` ， `controllers` 等子目录。
 
 可以使用路径或 [路径别名](concept-aliases.md) 来在配置 [[yii\base\Application::basePath|basePath]] 属性。
 两种格式所对应的目录都必须存在，否则系统会抛出一个异常。 系统会使用 `realpath()` 函数规范化配置的路径.
 
 [[yii\base\Application::basePath|basePath]] 属性经常用于派生一些其他重要路径（如runtime路径），因此，系统预定义 `@app` 代表这个路径。
-派生路径可以通过这个别名组成（如`@app/runtime`代表runtime的路径）。
+派生路径可以通过这个别名组成（如 `@app/runtime` 代表runtime的路径）。
 
 
 ### 重要属性 <span id="important-properties"></span>
@@ -65,7 +65,7 @@ $config = require(__DIR__ . '/../config/web.php');
 
 #### [[yii\base\Application::aliases|aliases]] <span id="aliases"></span>
 
-该属性允许你用一个数组定义多个 [别名](concept-aliases.md)。数组的key为别名名称，值为对应的路径。例如：
+该属性允许你用一个数组定义多个 [别名](concept-aliases.md) 。数组的 key 为别名名称，值为对应的路径。例如：
 
 ```php
 [
@@ -81,16 +81,16 @@ $config = require(__DIR__ . '/../config/web.php');
 
 #### [[yii\base\Application::bootstrap|bootstrap]] <span id="bootstrap"></span>
 
-这个属性很实用，它允许你用数组指定启动阶段[[yii\base\Application::bootstrap()|bootstrapping process]]需要运行的组件。
-比如，如果你希望一个 [模块](structure-modules.md) 自定义 [URL 规则](runtime-url-handling.md)，你可以将模块ID加入到bootstrap数组中。
+这个属性很实用，它允许你用数组指定启动阶段 [[yii\base\Application::bootstrap()|bootstrapping process]] 需要运行的组件。
+比如，如果你希望一个 [模块](structure-modules.md) 自定义 [URL 规则](runtime-url-handling.md) ，你可以将模块 ID 加入到 bootstrap 数组中。
 
-属性中的每个组件需要指定以下一项:
+属性中的每个组件需要指定以下任意一项：
 
-- 应用 [组件](#components) ID.
-- [模块](#modules) ID.
-- 类名.
-- 配置数组.
-- 创建并返回一个组件的无名称函数.
+- 应用 [组件](#components) ID
+-  [模块](#modules) ID
+- 类名
+- 配置数组
+- 创建并返回一个组件的无名称函数
 
 例如：
 
@@ -119,15 +119,15 @@ $config = require(__DIR__ . '/../config/web.php');
 
 > 补充: 如果模块ID和应用组件ID同名，优先使用应用组件ID，如果你想用模块ID，可以使用如下无名称函数返回模块ID。
 > ```php
-[
-    function () {
-        return Yii::$app->getModule('user');
-    },
-]
-```
+> [
+>     function () {
+>         return Yii::$app->getModule('user');
+>     },
+> ]
+> ```
 
 
-在启动阶段，每个组件都会实例化。如果组件类实现接口 [[yii\base\BootstrapInterface]],也会调用 [[yii\base\BootstrapInterface::bootstrap()|bootstrap()]] 方法。
+在启动阶段，每个组件都会实例化。如果组件类实现接口  [[yii\base\BootstrapInterface]] ，也会调用 [[yii\base\BootstrapInterface::bootstrap()|bootstrap()]] 方法。
 
 举一个实际的例子，[Basic Application Template](start-installation.md) 应用主体配置中，
 开发环境下会在启动阶段运行 `debug` 和 `gii` 模块。
@@ -148,10 +148,10 @@ if (YII_ENV_DEV) {
 
 #### [[yii\web\Application::catchAll|catchAll]] <span id="catchAll"></span>
 
-该属性仅 [[yii\web\Application|Web applications]] 网页应用支持。
-它指定一个要处理所有用户请求的 [控制器方法](structure-controllers.md)，通常在维护模式下使用，同一个方法处理所有用户请求。
+**该属性仅 [[yii\web\Application|Web applications]] 网页应用支持。**
+它指定一个要处理所有的用户请求的 [控制器方法](structure-controllers.md) ，通常在维护模式下使用，同一个方法处理所有用户请求。
 
-该配置为一个数组，第一项指定动作的路由，剩下的数组项(key-value 成对)指定传递给动作的参数，例如：
+该配置为一个数组，第一项指定动作的路由，剩下的数组项( key-value 成对)指定传递给动作的参数，例如：
 
 ```php
 [
@@ -166,7 +166,7 @@ if (YII_ENV_DEV) {
 
 #### [[yii\base\Application::components|components]] <span id="components"></span>
 
-这是最重要的属性，它允许你注册多个在其他地方使用的[应用组件](#structure-application-components.md). 例如
+这是最重要的属性，它允许你注册多个在其他地方使用的 [应用组件](#structure-application-components.md) 。例如：
 
 ```php
 [
@@ -182,7 +182,7 @@ if (YII_ENV_DEV) {
 ]
 ```
 
-每一个应用组件指定一个key-value对的数组，key代表组件ID，value代表组件类名或 [配置](concept-configurations.md)。
+每一个应用组件指定一个 key-value 对的数组， key 代表组件 ID ， value 代表组件类名或 [配置](concept-configurations.md) 。
 
 在应用中可以任意注册组件，并可以通过表达式 `\Yii::$app->ComponentID` 全局访问。
 
@@ -191,9 +191,9 @@ if (YII_ENV_DEV) {
 
 #### [[yii\base\Application::controllerMap|controllerMap]] <span id="controllerMap"></span>
 
-该属性允许你指定一个控制器ID到任意控制器类。Yii遵循一个默认的 [规则](#controllerNamespace)指定控制器ID到任意控制器类（如`post`对应`app\controllers\PostController`）。
-通过配置这个属性，可以打破这个默认规则，在下面的例子中，`account`对应到`app\controllers\UserController`，
-`article` 对应到 `app\controllers\PostController`。
+该属性允许你指定一个控制器 ID 到任意控制器类。 Yii 遵循一个默认的 [规则](#controllerNamespace) 指定控制器 ID 到任意控制器类（如 `post` 对应 `app\controllers\PostController` ）。
+通过配置这个属性，可以打破这个默认规则，在下面的例子中， `account` 对应到`app\controllers\UserController`，
+`article` 对应到 `app\controllers\PostController` 。
 
 ```php
 [
@@ -209,18 +209,18 @@ if (YII_ENV_DEV) {
 ]
 ```
 
-数组的键代表控制器ID，数组的值代表对应的类名。
+数组的键代表控制器 ID ，数组的值代表对应的类名。
 
 
 #### [[yii\base\Application::controllerNamespace|controllerNamespace]] <span id="controllerNamespace"></span>
 
-该属性指定控制器类默认的命名空间，默认为`app\controllers`。比如控制器ID为 `post` 默认对应 `PostController` （不带命名空间），
-类全名为 `app\controllers\PostController`。
+该属性指定控制器类默认的命名空间，默认为 `app\controllers` 。比如控制器ID为 `post` 默认对应 `PostController` （不带命名空间），
+类全名为 `app\controllers\PostController` 。
 
 控制器类文件可能放在这个命名空间对应目录的子目录下，
 例如，控制器ID `admin/post` 对应的控制器类全名为 `app\controllers\admin\PostController`。
 
-控制器类全面能被 [自动加载](concept-autoloading.md)，这点是非常重要的，控制器类的实际命名空间对应这个属性，
+控制器类全面能被 [自动加载](concept-autoloading.md) ，这点是非常重要的，控制器类的实际命名空间对应这个属性，
 否则，访问时你会收到"Page Not Found"[译：页面找不到]。
 
 如果你想打破上述的规则，可以配置 [controllerMap](#controllerMap) 属性。
@@ -240,9 +240,9 @@ if (YII_ENV_DEV) {
 
 #### [[yii\base\Application::modules|modules]] <span id="modules"></span>
 
-该属性指定应用所包含的 [模块](structure-modules.md)。
+该属性指定应用所包含的 [模块](structure-modules.md) 。
 
-该属性使用数组包含多个模块类 [配置](concept-configurations.md)，数组的键为模块ID，例：
+该属性使用数组包含多个模块类 [配置](concept-configurations.md) ，数组的键为模块 ID ，例：
 
 ```php
 [
@@ -306,7 +306,7 @@ $width = \Yii::$app->params['thumbnail.size'][0];
 #### [[yii\base\Application::timeZone|timeZone]] <span id="timeZone"></span>
 
 该属性提供一种方式修改PHP运行环境中的默认时区，配置该属性本质上就是调用PHP函数
-[date_default_timezone_set()](http://php.net/manual/en/function.date-default-timezone-set.php)，例如：
+ [date_default_timezone_set()](http://php.net/manual/en/function.date-default-timezone-set.php) ，例如：
 
 ```php
 [
@@ -317,7 +317,7 @@ $width = \Yii::$app->params['thumbnail.size'][0];
 
 #### [[yii\base\Application::version|version]] <span id="version"></span>
 
-该属性指定应用的版本，默认为`'1.0'`，其他代码不使用的话可以不配置。
+该属性指定应用的版本，默认为 `'1.0'` ，其他代码不使用的话可以不配置。
 
 
 ### 实用属性 <span id="useful-properties"></span>
@@ -339,7 +339,7 @@ $width = \Yii::$app->params['thumbnail.size'][0];
 因此你不带路由的访问应用，默认会显示 `app\controllers\SiteController::actionIndex()` 的结果。
 
 对于 [[yii\console\Application|console applications]] 控制台应用，
-默认值为 `'help'` 对应 [[yii\console\controllers\HelpController::actionIndex()]]。
+默认值为 `'help'` 对应 [[yii\console\controllers\HelpController::actionIndex()]] 。
 因此，如果执行的命令不带参数，默认会显示帮助信息。
 
 
@@ -372,12 +372,12 @@ $width = \Yii::$app->params['thumbnail.size'][0];
 
 如上所示，该属性包含一个扩展定义数组，每个扩展为一个包含 `name` 和 `version` 项的数组。
 如果扩展要在 [引导启动](runtime-bootstrapping.md) 阶段运行，需要配置 `bootstrap`以及对应的引导启动类名或 [configuration](concept-configurations.md) 数组。
-扩展也可以定义 [别名](concept-aliases.md)
+扩展也可以定义 [别名](concept-aliases.md) 。
 
 
 #### [[yii\base\Application::layout|layout]] <span id="layout"></span>
 
-该属性指定渲染 [视图](structure-views.md) 默认使用的布局名字，默认值为 `'main'` 对应[布局路径](#layoutPath)下的 `main.php` 文件，
+该属性指定渲染 [视图](structure-views.md) 默认使用的布局名字，默认值为 `'main'` 对应 [布局路径](#layoutPath) 下的 `main.php` 文件，
 如果 [布局路径](#layoutPath) 和 [视图路径](#viewPath) 都是默认值，默认布局文件可以使用路径别名`@app/views/layouts/main.php`
 
 如果不想设置默认布局文件，可以设置该属性为 `false`，这种做法比较罕见。
@@ -388,7 +388,7 @@ $width = \Yii::$app->params['thumbnail.size'][0];
 该属性指定查找布局文件的路径，默认值为 [视图路径](#viewPath) 下的 `layouts` 子目录。
 如果 [视图路径](#viewPath) 使用默认值，默认的布局路径别名为`@app/views/layouts`。
 
-该属性需要配置成一个目录或 路径 [别名](concept-aliases.md)。
+该属性需要配置成一个目录或 路径 [别名](concept-aliases.md) 。
 
 
 #### [[yii\base\Application::runtimePath|runtimePath]] <span id="runtimePath"></span>
@@ -403,7 +403,7 @@ $width = \Yii::$app->params['thumbnail.size'][0];
 
 #### [[yii\base\Application::viewPath|viewPath]] <span id="viewPath"></span>
 
-该路径指定视图文件的根目录，默认值为带别名的 `@app/views`，可以配置它为一个目录或者路径 [别名](concept-aliases.md).
+该路径指定视图文件的根目录，默认值为带别名的 `@app/views`，可以配置它为一个目录或者路径 [别名](concept-aliases.md) 。
 
 
 #### [[yii\base\Application::vendorPath|vendorPath]] <span id="vendorPath"></span>
@@ -411,14 +411,14 @@ $width = \Yii::$app->params['thumbnail.size'][0];
 该属性指定 [Composer](https://getcomposer.org) 管理的供应商路径，该路径包含应用使用的包括Yii框架在内的所有第三方库。
 默认值为带别名的 `@app/vendor` 。
 
-可以配置它为一个目录或者路径 [别名](concept-aliases.md)，当你修改时，务必修改对应的 Composer 配置。
+可以配置它为一个目录或者路径 [别名](concept-aliases.md) ，当你修改时，务必修改对应的 Composer 配置。
 
 为了简化访问该路径，Yii预定义别名 `@vendor` 代表该路径。
 
 
 #### [[yii\console\Application::enableCoreCommands|enableCoreCommands]] <span id="enableCoreCommands"></span>
 
-该属性仅 [[yii\console\Application|console applications]] 控制台应用支持， 用来指定是否启用Yii中的核心命令，默认值为 `true`。
+该属性仅 [[yii\console\Application|console applications]] 控制台应用支持， 用来指定是否启用 Yii 中的核心命令，默认值为 `true` 。
 
 
 ## 应用事件 <span id="application-events"></span>
@@ -435,7 +435,7 @@ $width = \Yii::$app->params['thumbnail.size'][0];
 
 `on eventName` 语法的用法在 [Configurations](concept-configurations.md#configuration-format) 一节有详细描述.
 
-另外，在应用主体实例化后，你可以在[引导启动](runtime-bootstrapping.md) 阶段附加事件处理代码，例如：
+另外，在应用主体实例化后，你可以在 [引导启动](runtime-bootstrapping.md) 阶段附加事件处理代码，例如：
 
 ```php
 \Yii::$app->on(\yii\base\Application::EVENT_BEFORE_REQUEST, function ($event) {
@@ -445,27 +445,27 @@ $width = \Yii::$app->params['thumbnail.size'][0];
 
 ### [[yii\base\Application::EVENT_BEFORE_REQUEST|EVENT_BEFORE_REQUEST]] <span id="beforeRequest"></span>
 
-该事件在应用处理请求*before*之前，实际的事件名为 `beforeRequest`。
+该事件在应用处理请求**之前**，实际的事件名为 `beforeRequest` 。
 
 在事件触发前，应用主体已经实例化并配置好了，所以通过事件机制将你的代码嵌入到请求处理过程中非常不错。
-例如在事件处理中根据某些参数动态设置[[yii\base\Application::language]]语言属性。
+例如在事件处理中根据某些参数动态设置 [[yii\base\Application::language]] 语言属性。
 
 
 ### [[yii\base\Application::EVENT_AFTER_REQUEST|EVENT_AFTER_REQUEST]] <span id="afterRequest"></span>
 
-该事件在应用处理请求*after*之后但在返回响应*before*之前触发，实际的事件名为`afterRequest`。
+该事件在应用处理请求**之后**但在返回响应**之前**触发，实际的事件名为 `afterRequest` 。
 
 该事件触发时，请求已经被处理完，可以做一些请求后处理或自定义响应。
 
-注意 [[yii\web\Response|response]] 组件在发送响应给终端用户时也会触发一些事件，这些事件都在本事件*after*之后触发。
+注意 [[yii\web\Response|response]] 组件在发送响应给终端用户时也会触发一些事件，这些事件都在本事件**之后**触发。
 
 
 ### [[yii\base\Application::EVENT_BEFORE_ACTION|EVENT_BEFORE_ACTION]] <span id="beforeAction"></span>
 
-该事件在每个 [控制器动作](structure-controllers.md) 运行*before*之前会被触发，实际的事件名为 `beforeAction`.
+该事件在**每个** [控制器动作](structure-controllers.md) 运行**之前**会被触发，实际的事件名为 `beforeAction`.
 
 事件的参数为一个 [[yii\base\ActionEvent]] 实例，
-事件处理中可以设置[[yii\base\ActionEvent::isValid]] 为 `false` 停止运行后续动作，例如：
+事件处理中可以设置 [[yii\base\ActionEvent::isValid]] 为 `false` 停止运行后续动作，例如：
 
 ```php
 [
@@ -487,7 +487,7 @@ $width = \Yii::$app->params['thumbnail.size'][0];
 
 该事件在每个 [控制器动作](structure-controllers.md) 运行*after*之后会被触发，实际的事件名为 `afterAction`.
 
-该事件的参数为 [[yii\base\ActionEvent]] 实例，通过[[yii\base\ActionEvent::result]]属性，
+该事件的参数为 [[yii\base\ActionEvent]] 实例，通过 [[yii\base\ActionEvent::result]] 属性，
 事件处理可以访问和修改动作的结果。例如：
 
 ```php
@@ -511,13 +511,15 @@ $width = \Yii::$app->params['thumbnail.size'][0];
 
 1. 入口脚本加载应用主体配置数组。
 2. 入口脚本创建一个应用主体实例：
-  * 调用 [[yii\base\Application::preInit()|preInit()]] 配置几个高级别应用主体属性，比如[[yii\base\Application::basePath|basePath]]。
+  * 调用 [[yii\base\Application::preInit()|preInit()]] 配置几个高级别应用主体属性，比如 [[yii\base\Application::basePath|basePath]] 。
   * 注册 [[yii\base\Application::errorHandler|error handler]] 错误处理方法.
-  * 配置应用主体属性.
-  * 调用 [[yii\base\Application::init()|init()]] 初始化，该函数会调用 [[yii\base\Application::bootstrap()|bootstrap()]] 运行引导启动组件.
-3. 入口脚本调用 [[yii\base\Application::run()]] 运行应用主体:
+  * 配置应用主体属性。
+  * 调用 [[yii\base\Application::init()|init()]] 初始化，该函数会调用 [[yii\base\Application::bootstrap()|bootstrap()]] 运行引导启动组件。
+3. 入口脚本调用 [[yii\base\Application::run()]] 运行应用主体：
   * 触发 [[yii\base\Application::EVENT_BEFORE_REQUEST|EVENT_BEFORE_REQUEST]] 事件。
   * 处理请求：解析请求 [路由](runtime-routing.md) 和相关参数；创建路由指定的模块、控制器和动作对应的类，并运行动作。
   * 触发 [[yii\base\Application::EVENT_AFTER_REQUEST|EVENT_AFTER_REQUEST]] 事件。
-  * 发送响应到终端用户.
+  * 发送响应到终端用户。
 4. 入口脚本接收应用主体传来的退出状态并完成请求的处理。
+
+

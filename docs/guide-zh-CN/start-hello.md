@@ -98,3 +98,5 @@ http://hostname/index.php?r=site/say&message=Hello+World
 你同样学习了 Yii 路由的相关内容，它是用户请求与控制器操作之间的桥梁。
 
 下一章，你将学习如何创建一个模型，以及添加一个包含 HTML 表单的页面。
+
+
