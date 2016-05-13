@@ -110,6 +110,29 @@ class PostController extends Controller
 布局文件默认放在 `views/layouts` 目录下，可配置[[yii\base\Module::layout]]属性指定布局名，
 如果没有配置 `layout` 属性名，默认会使用应用的布局。
 
+### 模块中的控制台命令 <span id="console-commands-in-modules"></span>
+
+我们的模块中可能也会声明一些[控制台](http://www.yiichina.com/doc/guide/2.0/tutorial-console)模式下可用的命令。
+
+为了使得命令行实用程序（command line utility）能够识别到我们的命令，在Yii以命令行模式运行时，我们需要修改yii\base\Module::controllerNamespace属性，将其指向我们定义的命令的命名空间。
+
+如下代码就是其中的一个实现方法，在模块的初始化方法中测试Yii应用程序的实例类型：
+
+```php
+public function init()
+{
+    parent::init();
+    if (Yii::$app instanceof \yii\console\Application) {
+        $this->controllerNamespace = 'app\modules\forum\commands';
+    }
+}
+```
+
+之后我们的命令可以通过如下的规则从命令行中访问到：
+
+```shell
+yii <module_id>/<command>/<sub_command>
+```
 
 ## 使用模块 <span id="using-modules"></span>
 
