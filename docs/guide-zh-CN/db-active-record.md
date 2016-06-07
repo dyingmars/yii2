@@ -80,6 +80,7 @@ AR 把相应数据行的每一个字段映射为 AR 对象的一个个特性变�
 
 ```php
 // "id" 和 "mail" 是 $customer 对象所关联的数据表的对应字段名
+$customer = Customer::findOne(123);
 $id = $customer->id;
 $email = $customer->email;
 ```
