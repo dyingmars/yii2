@@ -74,7 +74,7 @@ class Customer extends ActiveRecord
 
 AR 把相应数据行的每一个字段映射为 AR 对象的一个个特性变量（Attribute）
 一个特性就好像一个普通对象的公共属性一样（public property）。
-特性变量的名称和对应字段的名称是一样的，且大小姓名。
+特性变量的名称和对应字段的名称是一样的，且大小写敏感。
 
 使用以下语法读取列的值：
 
