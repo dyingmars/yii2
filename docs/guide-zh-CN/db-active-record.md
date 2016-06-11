@@ -16,7 +16,7 @@ Active Record
 
 ```php
 $customer = new Customer();
-$customer->name = '李狗蛋';
+$customer->name = 'Qiang';
 $customer->save();  // 一行新数据插入 customer 表
 ```
 
@@ -25,7 +25,7 @@ $customer->save();  // 一行新数据插入 customer 表
 
 ```php
 $db->createCommand('INSERT INTO customer (name) VALUES (:name)', [
-    ':name' => '李狗蛋',
+    ':name' => 'Qiang',
 ])->execute();
 ```
 
@@ -74,12 +74,13 @@ class Customer extends ActiveRecord
 
 AR 把相应数据行的每一个字段映射为 AR 对象的一个个特性变量（Attribute）
 一个特性就好像一个普通对象的公共属性一样（public property）。
-特性变量的名称和对应字段的名称是一样的，且大小姓名。
+特性变量的名称和对应字段的名称是一样的，且区分大小写。
 
 使用以下语法读取列的值：
 
 ```php
 // "id" 和 "mail" 是 $customer 对象所关联的数据表的对应字段名
+$customer = Customer::findOne(123);
 $id = $customer->id;
 $email = $customer->email;
 ```
@@ -87,7 +88,7 @@ $email = $customer->email;
 要改变列值，只要给关联属性赋新值并保存对象即可：
 
 ```php
-$customer->email = '哪吒@example.com';
+$customer->email = 'james@example.com';
 $customer->save();
 ```
 
@@ -429,7 +430,7 @@ class Customer extends \yii\db\ActiveRecord
 `hasMany()` 返回 [[yii\db\ActiveQuery]] 对象，该对象允许你通过
 [[yii\db\ActiveQuery]] 方法定制查询。
 
-如上声明后，执行`$customer->bigOrders` 就返回
+如上声明后，执行 `$customer->bigOrders` 就返回
 总额大于100的订单。使用以下代码更改设定值：
 
 ```php

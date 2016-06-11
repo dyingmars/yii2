@@ -61,7 +61,7 @@ class PostController extends Controller
 
 终端用户通过所谓的*路由*寻找到操作，路由是包含以下部分的字符串：
 
-* 模型ID: 仅存在于控制器属于非应用的[模块](structure-modules.md);
+* 模块ID: 仅存在于控制器属于非应用的[模块](structure-modules.md);
 * 控制器ID: 同应用（或同模块如果为模块下的控制器）下唯一标识控制器的字符串;
 * 操作ID: 同控制器下唯一标识操作的字符串。
 
@@ -115,7 +115,7 @@ class SiteController extends Controller
 
 控制器ID遵循以下规则衍生控制器类名：
 
-* 将用正斜杠区分的每个单词第一个字母转为大写。注意如果控制器ID包含正斜杠，只将最后的正斜杠后的部分第一个字母转为大写；
+* 将用中横杠区分的每个单词第一个字母转为大写。注意如果控制器ID包含正斜杠，只将最后的正斜杠后的部分第一个字母转为大写；
 * 去掉中横杠，将正斜杠替换为反斜杠;
 * 增加`Controller`后缀;
 * 在前面增加[[yii\base\Application::controllerNamespace|controller namespace]]控制器命名空间.
@@ -334,7 +334,7 @@ class PostController extends Controller
 * `http://hostname/index.php?r=post/view`: 会抛出[[yii\web\BadRequestHttpException]] 异常
   因为请求没有提供参数给必须赋值参数`$id`；
 * `http://hostname/index.php?r=post/view&id[]=123`: 会抛出[[yii\web\BadRequestHttpException]] 异常
-  因为`$id` 参数收到数字值 `['123']`而不是字符串.
+  因为`$id` 参数收到数组值 `['123']`而不是字符串.
 
 如果想让操作参数接收数组值，需要指定$id为`array`，如下所示：
 
@@ -388,7 +388,6 @@ class SiteController extends Controller
    * 否则会抛出[[yii\base\InvalidRouteException]]异常。
 3. 控制器按顺序调用应用主体、模块（如果控制器属于模块）、控制器的 `beforeAction()` 方法；
    * 如果任意一个调用返回false，后面未调用的`beforeAction()`会跳过并且操作执行会被取消；
-     action execution will be cancelled.
    * 默认情况下每个 `beforeAction()` 方法会触发一个 `beforeAction` 事件，在事件中你可以追加事件处理操作；
 4. 控制器执行操作:
    * 请求数据解析和填入到操作参数；
