@@ -74,12 +74,13 @@ class Customer extends ActiveRecord
 
 AR 把相应数据行的每一个字段映射为 AR 对象的一个个特性变量（Attribute）
 一个特性就好像一个普通对象的公共属性一样（public property）。
-特性变量的名称和对应字段的名称是一样的，且大小姓名。
+特性变量的名称和对应字段的名称是一样的，且区分大小写。
 
 使用以下语法读取列的值：
 
 ```php
 // "id" 和 "mail" 是 $customer 对象所关联的数据表的对应字段名
+$customer = Customer::findOne(123);
 $id = $customer->id;
 $email = $customer->email;
 ```
